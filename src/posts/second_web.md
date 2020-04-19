@@ -64,11 +64,17 @@ If native apps are linkable and cross-platform, there is no need for a centralis
 
 
 
+## Universal links
+
+Currently we can link from within a hypertext document to any resource, that was one key the idea of HTML. What if links could be in any type of file? What if any type of file could link to any other type of file? For example, in a video a part links out to another video? It would work just like linking hypertext documents, removing the need to duplicate content and keep it up-to-date. Not all links make sense though, e.g. linking to a document from within a music song. New file types would need to be invented, that implement linking capabilities, like HTML did for documents. One of those file types would be the the application file type that was discussed in the rest of this post.
+
+
+
 ## FAQ
 
 - So you want to delete the Web?
 
-No. The Web is amazing and there to stay. It's just not designed for applications. It is a place for mostly static content like documents. Any interactive content that represents an application should run in the second Web. This proposal takes nothing away. It just allows Web apps to be native applications instead.
+No. The Web is amazing and there to stay. It's just not designed for applications. It was made for static content like documents. Any interactive content that works like an application should run in the second Web. This proposal takes nothing away. It just allows Web apps to be native applications instead.
 
 - What about [some detail]?
 
