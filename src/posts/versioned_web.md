@@ -16,7 +16,7 @@ While certainly nice for implementations, compatibility is a huge pain for devel
 
 Compatibility is not only a pain for developers but also slows down the development of the language as a whole. For every new feature a lot of time is spent just to make it work around all existing bugs, and minimise any breaking change. If these bugs weren't there, progress would be so much faster. Mistakes should be allowed to be fixed. Compatibility prevents that.
 
-This post tries to argue that the languages of the Web don't need forward and backward compatibility and how this can be solved with versions. This is actually what languages for mobile app development like Swift already do. The version of Swift you use is just implicitly determined by the version of Xcode you use, e.g. Swift 4 in Xcode 9, Swift 5 in Xcode 10, etc.
+This post tries to argue that the languages of the Web don't need forward and backward compatibility and how this can be solved with versions. This is actually what languages for app development like Swift already do. The version of Swift you use is just implicitly determined by the version of Xcode you use, e.g. Swift 4 in Xcode 9, Swift 5 in Xcode 10, etc.
 
 
 
@@ -26,7 +26,7 @@ A version of a language is its specification at a specific point in time. You co
 
 Between versions the language is not constrained by backward or forward compatibility. This means in theory you could make the new version a completely different language, say make it consist of emoji characters instead of ASCII. In practice, this would be used to fix all bugs of previous versions of the language. I imagine no more margin collapse by default in CSS, no more `typeof null == "object"` in JavaScript, etc.
 
-Developers would need to be able to choose a version of the language. Since on the Web the source code is distributed instead of the machine code like in mobile app development, there would need to be a version identifier at the top of every file. For compatibility, a file without a version identifier maps to todays spec before any version was introduced. I'll intentionally leave out a concrete suggestion for the syntax of such a version identifier, because this would certainly be a hot topic of discussion and digress from the point this post tries to make.
+Developers would need to be able to choose a version of the language. Since on the Web the source code is distributed instead of the machine code like in app development, there would need to be a version identifier at the top of every file. For compatibility, a file without a version identifier maps to todays spec before any version was introduced. I'll intentionally leave out a concrete suggestion for the syntax of such a version identifier, because this would certainly be a hot topic of discussion and digress from the point this post tries to make.
 
 The glaring question is what happens with a new version in an old implementation? Since it doesn't know how to handle the changes it would necessarily break. But wouldn't that destroy the Web? Shouldn't every implementation be capable of displaying any webpage? Well, no. This is exactly the topic of forward compatibility, and if you read the Introduction you already know that JavaScript is not forward compatible. In other words, already today this problem exists, since old implementations break on new JavaScript. And since webpages heavily rely on JavaScript, you can very well assume the whole webpage breaks. HTML and CSS remain forward compatible with the assumption that you could still make some use of the static version. But increasingly more webpages rely on JavaScript and become unusable without it, invalidating the whole assumption of HTML and CSS for being forward compatible.
 
@@ -40,37 +40,37 @@ PS. The argument, that no current implementation will support versions and there
 
 
 
-## Mobile Apps
+## Apps
 
-Websites are far more than the static documents they were intended for when conceived. In terms of functionality, websites aren't really different from mobile apps anymore. And the line between websites / mobile apps and desktop programs continues to blur as well. All can be simply seen as "applications".
+Webpages are far more than the static documents they were intended for when conceived. In terms of functionality, webpages aren't really different from mobile apps anymore. And the line between mobile apps and desktop programs continues to blur as well. All concepts evolve towards a common "application". Though by itself neither webpages not mobile / desktop apps are perfect yet, as each has some things that the other lacks. There are two possibilities. Make apps learn from webpages or webpages learn from apps.
 
 The problem is the languages of the Web weren't designed for what they are used for today. They were designed for static documents, not for dynamic applications. They lack too much compared to languages like Swift and SwiftUI. For a more detailed discussion see [A second Web](A%20second%20Web.md).
 
-There are two possibilities.
+### Make apps better webpages
 
-### Make mobile apps like websites
+The only thing that apps conceptually lack is being identified by URLs. This is the foundation of the Web and what made it into the universal space of information it is today. If you could link to any place within an app, then you could essentially replace webpages with apps.
 
-The only thing that mobile apps conceptually lack is being identified by URLs. This is the foundation of the Web and what made it into the universal space of information it is today. If you could link to any place within an app, then you could essentially replace webpages with mobile apps. But apps also would need to be cross-device compatible. Both things don't look too promising right now.
+However this puts the demand for action on the parties controlling the app ecosystem. All parties would need to work towards a cross-device compatible platform. Seeing that the parties are private companies making profits through their closed ecosystems, this is likely not going to happen. The Web community can not do anything to change this, as it's nothing it can control. The only possibility for change is if the Web changes, because this is what the Web community can control.
 
-### Make websites like mobile apps
+### Make webpages better apps
 
-The different between apps and websites is that apps are unlike websites not source code, but compiled to machine code. Machine code doesn't evolve, meaning it continues to run no matter what happens to the source language. The source language can freely evolve without breaking existing machine code. Backward and forward compatibility of the source language only happens between the source code and the compiler, which are both controlled by the developer, not between the source code and the user, which aren't both controlled by the developer.
+The different between apps and webpages is that apps are unlike webpages not source code, but compiled to machine code. Machine code doesn't evolve, meaning it continues to run no matter what happens to the source language. The source language can freely evolve without breaking existing machine code. Backward and forward compatibility of the source language only happens between the source code and the compiler, which are both controlled by the developer, not between the source code and the user, which aren't both controlled by the developer.
 
-There is no reason why webpages could not be binaries just like mobile apps. The tooling nowadays is already a compilation [^1] from what ever higher framework language you use (React, Vue, Angular, Svelte, etc.) down to the lower languages of the Web. No serious website is written without such tooling anymore. Making the compilation necessary wouldn't even be noticed by most developers. A real binary format would come with countless benefits, like better peformance, smaller file size, mangling by design, etc.
+There is no reason why webpages could not be binaries just like apps. The tooling nowadays is already a compilation [^1] from what ever higher framework language you use (React, Vue, Angular, Svelte, etc.) down to the lower languages of the Web. No serious webpage is written without such tooling anymore. Making the compilation necessary wouldn't even be noticed by most developers. A real binary format would come with countless benefits, like better peformance, smaller file size, mangling by design, etc.
 
 
 
 ## WASM
 
-Reading the previous section, you were probably thinking about WASM. WASM is a step in the right direction, but in it's current form it's not (yet) the magic cure-all.
+Reading the last section, you were probably thinking about WASM. WASM is a step in the right direction, but in it's current form it's not yet the magic cure-all.
 
-WASM is a binary format to which higher-level programming languages can be compiled. It allows you to write your code in your favorite programming languages, instead of only JavaScript, and compile it to run in the browser. Note, it doesn't replace JavaScript, as you could use JavaScript as your higher-level programming language of choice [^2]. Currently WASM lacks Web APIs, but they are coming.
+WASM is a binary format to which higher-level programming languages can be compiled. It allows you to write your code in your favorite programming languages, instead of only JavaScript, and compile it to run in the browser. Note, it doesn't replace JavaScript, as you could use JavaScript as your higher-level programming language of choice [^2].
 
-But WASM alone is not enough to create a webpage. It is not intended to be used for interface languages like HTML and CSS. Provided you don't want to write your entire interface through the horrible DOM and CSSOM APIs, WASM can't be used to create an entire webpage.
+But WASM alone is not enough to create a webpage. It is not intended to be used for interface languages like HTML and CSS. Assuming you don't want to write your entire interface through the horrible DOM and CSSOM APIs, WASM can't be used to create the presentation and content of the webpage.
 
-There would need to be some kind of "WASM UI", a binary format to which higher-level interface languages can be compiled. It would allow you to use your favorite interface languages to write your interface, not just HTML and CSS.
+What if there were some kind of "WASM UI", a binary format to which higher-level interface languages can be compiled? It would allow you to use your favorite interface languages to write your interface, not just HTML and CSS.
 
-WASM and the imaginary "WASM UI" would elevate the Web to a real programming platform. You could use your favorite language that compiles to WASM and "WASM UI" to develop websites. Similarly to the desktop, where you can use the language of your choice, like C++, Rust, etc., that compiles to ARM / X86 machine code. For example, instead of JavaScript you could use Swift, instead of HTML and CSS you could use Swift UI. Developers wouldn't be forced to create their webpages in the bugged languages of the Web anymore. This would be one of the biggest leaps for the Web since it's inception.
+WASM and the imaginary "WASM UI" would elevate the Web to a real programming platform. You could use your favorite language that compiles to WASM and "WASM UI" to develop webpages. Similarly to the desktop, where you can use the language of your choice, like C++, Rust, etc., that compiles to ARM / X86 machine code. For example, instead of JavaScript you could use Swift, instead of HTML and CSS you could use Swift UI. Developers wouldn't need to create their webpages in the bugged languages of the Web anymore if they wanted. This would be one of the biggest leaps for the Web since it's inception.
 
 
 
